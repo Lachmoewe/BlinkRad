@@ -42,6 +42,6 @@ int main(void) {
     return 0;
 }
 
-ISR (TIMER0_OVF_vect) {
+ISR (_VECTOR(4)) {
     PWM();
 }
