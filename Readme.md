@@ -20,3 +20,12 @@ sync bit, adding up to 14bit packages.
 - develop a protocol to send to attinys
 - maybe 433MHz control
 - you name it!
+
+## Getting the code to work
+You will need the basic avr stuff:
+```
+sudo apt-get install avr-libc gcc-avr avrdude
+```
+
+If you want to edit the board, go with either Cadsoft Eagle or
+edit the .brd files manually, its only xml.
