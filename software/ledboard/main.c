@@ -43,7 +43,7 @@ int main(void) {
 
     while (1) {
         // Toggle Port B pin 4 output state
-        if (PORTB && (1<<PB2) && !oldstate) { // check if sck rised
+        if ((PORTB && (1<<PB2)) && !oldstate) { // check if sck rised
             oldstate = 1;
 
             // read datain pin
