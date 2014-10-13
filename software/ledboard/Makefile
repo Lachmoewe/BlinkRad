@@ -1,4 +1,4 @@
-AVRFLAGS = -D AVRMODE -std=c99 -mmcu=attiny13 -Os 
+AVRFLAGS = -D AVRMODE -std=c99 -mmcu=attiny13 -O1 
 FUSES = -U lfuse:w:0x7a:m -U hfuse:w:0xff:m 
 
 all: program.elf
