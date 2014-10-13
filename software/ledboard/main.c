@@ -6,8 +6,10 @@
 #include <stdint.h>
 
 uint8_t r,g,b;
-uint8_t pwm_count;
-uint8_t oldstate;
+uint8_t pwm_count, bit_count;
+uint8_t sck_oldstate, used_oldstate;
+uint8_t changed_data;
+uint8_t use_this_package;
 
 uint8_t databit;
 uint16_t data;
@@ -39,20 +41,46 @@ int main(void) {
     b = 255;
 
     pwm_count = 0;
-    oldstate = 0;
+    bit_count = 0;
+    sck_oldstate = 0;
+    used_oldstate = 1;
+    use_this_package = 0;
+
+    uint16_t sync_sequence = 0x0FFF;
+
 
     while (1) {
         // Toggle Port B pin 4 output state
-        if ((PORTB && (1<<PB2)) && !oldstate) { // check if sck rised
-            oldstate = 1;
+        if ((PORTB && (1<<PB2)) && !sck_oldstate) { // check if sck rised
+            sck_oldstate = 1;
 
-            // read datain pin
+            // read datain pin, shift data one left and write databit to lowest pos
             databit = (PORTB && (1<<PB0));
             data = (data<<1);
             data |= databit;
-        
-        } else if (!(PORTB && (1<<PB2)) && oldstate){ // check if sck fell
-            oldstate = 0;
+
+            if ((data & sync_sequence) == sync_sequence) {
+                // we just found a sync sequence, reset the bit counter
+                bit_count = 0;
+            } else if ((bit_count == 1) && !changed_data) { // check if we got the used bit and didnt update rgb yet
+                if (!databit && used_oldstate) { // ckeck if the used bit is not set but the one before was
+                    use_this_package = 1;
+                    databit = 1; // set the used bit for next ledboard
+                }
+                bit_count++;
+            } else if ((bit_count == 13) && use_this_package) {
+                // we now received a full package and write its data to rgb
+                r = (data & 0x0F00)>>8;
+                g = (data & 0x00F0)>>4;
+                b =  data & 0x000F;
+                use_this_package = 0; // we wont use this package anymore
+                bit_count++;
+            } else if (bit_count == 14) {
+                bit_count = 0;
+            }
+
+        } else if (!(PORTB && (1<<PB2)) && sck_oldstate){ // check if sck fell
+            sck_oldstate = 0;
 
             // write dataout pin
             if (databit) {
