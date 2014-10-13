@@ -8,9 +8,12 @@ Using old or broken bicycle rims as an ilumination project.
 
 ## Current Status
 
-I got some prototype boards at home, now its time to write some code.
-Right now they seem to work, LED blinks as the FETs catch charge from
-the air.
+Got the current version (as of this commit) of boards at home.
+Already got one working with 24bit RGB PWM. Now Im trying
+to build a useful and robust data protocol. I was thinking
+about sending packages with 4bit per color, a used bit and a 
+sync bit, adding up to 14bit packages.
+
 
 ## Further plans
 - network control with teensy3.1
