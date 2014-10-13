@@ -75,7 +75,8 @@ int main(void) {
                 b =  data & 0x000F;
                 use_this_package = 0; // we wont use this package anymore
                 bit_count++;
-            } else if (bit_count == 14) {
+            } 
+            if (bit_count == 14) {
                 bit_count = 0;
             }
 
