@@ -29,3 +29,6 @@ sudo apt-get install avr-libc binutils-avr gcc-avr avrdude libusb-dev
 
 If you want to edit the board, go with either Cadsoft Eagle or
 edit the .brd files manually, its only xml.
+
+Thanks to apmorton for creating the teensy template:
+https://github.com/apmorton/teensy-template
