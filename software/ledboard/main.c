@@ -66,6 +66,10 @@ int main(void) {
                 if (!databit && used_oldstate) { // ckeck if the used bit is not set but the one before was
                     use_this_package = 1;
                     databit = 1; // set the used bit for next ledboard
+                    // TODO we still net to set used_oldstate somewhere!!!
+                    used_oldstate = 0;
+                } else if (databit) {
+                    used_oldstate = 1;
                 }
                 bit_count++;
             } else if ((bit_count == 13) && use_this_package) {
@@ -74,6 +78,8 @@ int main(void) {
                 g = (data & 0x00F0)>>4;
                 b =  data & 0x000F;
                 use_this_package = 0; // we wont use this package anymore
+                bit_count++;
+            } else {
                 bit_count++;
             } 
             if (bit_count == 14) {
