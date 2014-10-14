@@ -14,6 +14,10 @@ uint8_t use_this_package;
 uint8_t databit;
 uint16_t data;
 
+const uint8_t lookup[16] = {
+    0, 3, 7, 12, 19, 26, 35, 45, 58, 73, 91, 113, 140, 171, 209, 254
+};
+
 int PWM(void) {
     if (pwm_count == 0) {
         PORTB |= (1<<PB3)|(1<<PB4)|(1<<PB5); //0b00011100;
@@ -66,14 +70,20 @@ int main(void) {
                 if (!databit && used_oldstate) { // ckeck if the used bit is not set but the one before was
                     use_this_package = 1;
                     databit = 1; // set the used bit for next ledboard
+                    // TODO we still net to set used_oldstate somewhere!!!
+                    used_oldstate = 0;
+                } else if (databit) {
+                    used_oldstate = 1;
                 }
                 bit_count++;
             } else if ((bit_count == 13) && use_this_package) {
                 // we now received a full package and write its data to rgb
-                r = (data & 0x0F00)>>8;
-                g = (data & 0x00F0)>>4;
-                b =  data & 0x000F;
+                r = lookup[(data & 0x0F00)>>8];
+                g = lookup[(data & 0x00F0)>>4];
+                b = lookup[data & 0x000F];
                 use_this_package = 0; // we wont use this package anymore
+                bit_count++;
+            } else {
                 bit_count++;
             } 
             if (bit_count == 14) {
