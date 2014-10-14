@@ -22,9 +22,9 @@ sync bit, adding up to 14bit packages.
 - you name it!
 
 ## Getting the code to work
-You will need the basic avr stuff:
+You will need the following packages:
 ```
-sudo apt-get install avr-libc gcc-avr avrdude
+sudo apt-get install avr-libc binutils-avr gcc-avr avrdude libusb-dev
 ```
 
 If you want to edit the board, go with either Cadsoft Eagle or
