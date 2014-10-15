@@ -36,7 +36,7 @@ int PWM(void) {
 
 int main(void) {
 
-    DDRB = 0b00111000;
+    DDRB = 0b00111010;
     // Set up Port B data to be all low
     PORTB = 0;  
     
