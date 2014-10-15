@@ -27,6 +27,12 @@ You will need the following packages:
 sudo apt-get install avr-libc binutils-avr gcc-avr avrdude libusb-dev
 ```
 
+## Pretty Pictures
+[![Unpopulated Ledboard](blob/master/media/pictures/TN_ledboard_single_small.JPG)](blob/master/media/pictures/ledboard_single_small.JPG)
+
+
+
+## Notes
 If you want to edit the board, go with either Cadsoft Eagle or
 edit the .brd files manually, its only xml.
 
