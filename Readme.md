@@ -29,16 +29,16 @@ sudo apt-get install avr-libc binutils-avr gcc-avr avrdude libusb-dev
 
 ## Pretty Pictures
 <a href="media/pictures/all_small.JPG">
-    <img src="TN_media/pictures/TN_all_small.JPG" alt="A bunch of small boards">
+    <img src="media/pictures/TN_all_small.JPG" alt="A bunch of small boards">
 </a>
 <a href="media/pictures/led_small.JPG">
-    <img src="TN_media/pictures/TN_led_small.JPG" alt="Magnified LED">
+    <img src="media/pictures/TN_led_small.JPG" alt="Magnified LED">
 </a>
 <a href="media/pictures/grid2_small.JPG">
-    <img src="TN_media/pictures/TN_grid2_small.JPG" alt="Boards from fab">
+    <img src="media/pictures/TN_grid2_small.JPG" alt="Boards from fab">
 </a>
 <a href="media/pictures/ledboard_single_small.JPG">
-    <img src="TN_media/pictures/ledboard_single_small.JPG" alt="One bare ledboard">
+    <img src="media/pictures/ledboard_single_small.JPG" alt="One bare ledboard">
 </a>
 
 
