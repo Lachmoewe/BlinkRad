@@ -28,8 +28,8 @@ sudo apt-get install avr-libc binutils-avr gcc-avr avrdude libusb-dev
 ```
 
 ## Pretty Pictures
-<a href="blob/master/media/pictures/ledboard_single_small.JPG">
-    <img src="blob/master/media/pictures/ledboard_single_small.JPG" alt="ALT">
+<a href="media/pictures/ledboard_single_small.JPG">
+    <img src="media/pictures/ledboard_single_small.JPG" alt="ALT">
 </a>
 
 
