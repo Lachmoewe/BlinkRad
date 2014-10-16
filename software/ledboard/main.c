@@ -40,8 +40,8 @@ int main(void) {
     // Set up Port B data to be all low
     PORTB = 0;  
     
-    r =  11;
-    g =  64;
+    r = 255;
+    g = 255;
     b = 255;
 
     pwm_count = 0;
