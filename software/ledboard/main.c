@@ -50,7 +50,7 @@ int main(void) {
     used_oldstate = 1;
     use_this_package = 0;
 
-    uint16_t sync_sequence = 0x0FFF;
+    uint16_t sync_sequence = 0x2FFF;  // 14 bit set to 1
 
 
     while (1) {
