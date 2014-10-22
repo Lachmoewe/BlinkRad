@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -2040,19 +2040,6 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <junction x="154.94" y="40.64"/>
 </segment>
 </net>
-<net name="MISO" class="0">
-<segment>
-<label x="73.66" y="-30.48" size="1.778" layer="95"/>
-<pinref part="MISO" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="-30.48" x2="53.34" y2="-30.48" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="-30.48" x2="53.34" y2="-27.94" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="PB1/PCINT1/AIN1/OC0B/INT0/MISO"/>
-<wire x1="93.98" y1="-7.62" x2="83.82" y2="-7.62" width="0.1524" layer="91"/>
-<label x="83.82" y="-7.62" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="SCK" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB2/PCINT2/SCK/ADC1/T0"/>
@@ -2109,18 +2096,6 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <junction x="154.94" y="48.26"/>
 </segment>
 </net>
-<net name="MOSI" class="0">
-<segment>
-<label x="73.66" y="-45.72" size="1.778" layer="95"/>
-<pinref part="MOSI" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="PB0/PCINT0/AIN0/OC0A/MOSI"/>
-<wire x1="93.98" y1="-5.08" x2="83.82" y2="-5.08" width="0.1524" layer="91"/>
-<label x="83.82" y="-5.08" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="RED" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB3/PCINT3/CLKI/ADC3"/>
@@ -2137,6 +2112,31 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <pinref part="Q-GREEN" gate="G$1" pin="G"/>
 <wire x1="48.26" y1="27.94" x2="48.26" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="-15.24" x2="93.98" y2="-15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="DATAIN" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PB0/PCINT0/AIN0/OC0A/MOSI"/>
+<wire x1="93.98" y1="-5.08" x2="83.82" y2="-5.08" width="0.1524" layer="91"/>
+<label x="83.82" y="-5.08" size="1.778" layer="95"/>
+</segment>
+<segment>
+<label x="73.66" y="-45.72" size="1.778" layer="95"/>
+<pinref part="MOSI" gate="G$1" pin="1"/>
+<wire x1="78.74" y1="-45.72" x2="53.34" y2="-45.72" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="DATAOUT" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PB1/PCINT1/AIN1/OC0B/INT0/MISO"/>
+<wire x1="93.98" y1="-7.62" x2="83.82" y2="-7.62" width="0.1524" layer="91"/>
+<label x="83.82" y="-7.62" size="1.778" layer="95"/>
+</segment>
+<segment>
+<label x="73.66" y="-30.48" size="1.778" layer="95"/>
+<pinref part="MISO" gate="G$1" pin="1"/>
+<wire x1="78.74" y1="-30.48" x2="53.34" y2="-30.48" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="-30.48" x2="53.34" y2="-27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

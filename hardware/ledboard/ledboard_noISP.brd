@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -586,15 +586,6 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="C1" pad="2"/>
 <via x="9.017" y="1.143" extent="1-16" drill="0.3302" diameter="0.254"/>
 </signal>
-<signal name="MISO">
-<contactref element="IC1" pad="6"/>
-<contactref element="MISO" pad="P$1"/>
-<wire x1="6.477" y1="15.367" x2="6.477" y2="15.113" width="0.254" layer="16"/>
-<wire x1="6.477" y1="15.113" x2="4.953" y2="13.589" width="0.254" layer="16"/>
-<via x="4.953" y="13.589" extent="1-16" drill="0.3302" diameter="0.254"/>
-<wire x1="4.953" y1="13.589" x2="4.445" y2="14.097" width="0.254" layer="1"/>
-<wire x1="4.445" y1="14.097" x2="2.426" y2="14.097" width="0.254" layer="1"/>
-</signal>
 <signal name="SCK">
 <contactref element="IC1" pad="7"/>
 <contactref element="SCK" pad="P$1"/>
@@ -642,20 +633,6 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="C1" pad="1"/>
 <via x="1.397" y="11.938" extent="1-16" drill="0.3302" diameter="0.254"/>
 </signal>
-<signal name="MOSI">
-<contactref element="IC1" pad="5"/>
-<contactref element="MOSI" pad="P$1"/>
-<via x="6.477" y="1.143" extent="1-16" drill="0.3302" diameter="0.254"/>
-<wire x1="2.426" y1="15.367" x2="4.699" y2="15.367" width="0.254" layer="1"/>
-<wire x1="4.699" y1="15.367" x2="6.35" y2="13.716" width="0.254" layer="1"/>
-<via x="6.35" y="13.716" extent="1-16" drill="0.3302" diameter="0.254"/>
-<wire x1="6.35" y1="13.716" x2="6.35" y2="7.366" width="0.254" layer="16"/>
-<wire x1="6.35" y1="7.366" x2="8.255" y2="5.461" width="0.254" layer="16"/>
-<wire x1="8.255" y1="5.461" x2="8.255" y2="3.048" width="0.254" layer="16"/>
-<wire x1="8.255" y1="3.048" x2="7.493" y2="2.286" width="0.254" layer="16"/>
-<wire x1="7.493" y1="2.286" x2="7.493" y2="2.159" width="0.254" layer="16"/>
-<wire x1="7.493" y1="2.159" x2="6.477" y2="1.143" width="0.254" layer="16"/>
-</signal>
 <signal name="RED">
 <contactref element="IC1" pad="2"/>
 <contactref element="Q-RED" pad="1"/>
@@ -669,6 +646,29 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="8.9" y1="14.087" x2="9.652" y2="13.335" width="0.254" layer="1"/>
 <wire x1="9.652" y1="13.335" x2="9.652" y2="10.459" width="0.254" layer="1"/>
 <wire x1="9.652" y1="10.459" x2="9.459" y2="10.371" width="0.254" layer="1"/>
+</signal>
+<signal name="DATAIN">
+<contactref element="IC1" pad="5"/>
+<contactref element="MOSI" pad="P$1"/>
+<via x="6.477" y="1.143" extent="1-16" drill="0.3302" diameter="0.254"/>
+<wire x1="4.699" y1="15.367" x2="6.35" y2="13.716" width="0.254" layer="1"/>
+<via x="6.35" y="13.716" extent="1-16" drill="0.3302" diameter="0.254"/>
+<wire x1="6.35" y1="13.716" x2="6.35" y2="7.366" width="0.254" layer="16"/>
+<wire x1="6.35" y1="7.366" x2="8.255" y2="5.461" width="0.254" layer="16"/>
+<wire x1="8.255" y1="5.461" x2="8.255" y2="3.048" width="0.254" layer="16"/>
+<wire x1="8.255" y1="3.048" x2="7.493" y2="2.286" width="0.254" layer="16"/>
+<wire x1="7.493" y1="2.286" x2="7.493" y2="2.159" width="0.254" layer="16"/>
+<wire x1="7.493" y1="2.159" x2="6.477" y2="1.143" width="0.254" layer="16"/>
+<wire x1="4.699" y1="15.367" x2="2.426" y2="15.367" width="0.254" layer="1"/>
+</signal>
+<signal name="DATAOUT">
+<contactref element="IC1" pad="6"/>
+<contactref element="MISO" pad="P$1"/>
+<wire x1="6.477" y1="15.367" x2="6.477" y2="15.113" width="0.254" layer="16"/>
+<wire x1="6.477" y1="15.113" x2="4.953" y2="13.589" width="0.254" layer="16"/>
+<via x="4.953" y="13.589" extent="1-16" drill="0.3302" diameter="0.254"/>
+<wire x1="4.953" y1="13.589" x2="4.445" y2="14.097" width="0.254" layer="1"/>
+<wire x1="4.445" y1="14.097" x2="2.426" y2="14.097" width="0.254" layer="1"/>
 </signal>
 </signals>
 </board>
