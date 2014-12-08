@@ -1,38 +1,75 @@
 #include "WProgram.h"
 
-uint8_t display[36] = {
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00,
-    0x00,0x00,0x00,0x00    
-};
+#define DISPLAYSIZE 36
+
+#define DATAPIN 11
+#define CLKPIN 14
+
+uint16_t display[DISPLAYSIZE];
+uint16_t colorbitpos = 0;
+uint8_t header = 0;
+
 
 void setLed(uint8_t nr, uint8_t r, uint8_t g, uint8_t b) {
-    if (nr<36) {
-        display[nr+1] = (r<<8) + (g<<4) + b;
+    if (DISPLAYSIZE<36) {
+        display[nr] = (r<<8) + (g<<4) + b;
     }
 }
 
-uint8_t nextBit(void) {
-    static uint16_t bitpos;
-    return 0;
+void bangBit(uint8_t b) {
+    digitalWriteFast(DATAPIN, b);           // bang one bit
+    digitalWriteFast(CLKPIN, HIGH);         // rising edge
+    delay(1);
+    digitalWriteFast(CLKPIN, LOW);          // falling edge
+    delay(1);
 }
+
+void sendSyncPackage() {
+    uint8_t i = 0;
+    while (i < 14) {
+        bangBit(1);
+        i++;
+    }
+}
+
+void sendPackage(uint8_t n) {
+    uint8_t i = 0;
+    bangBit(0);
+    bangBit(0);
+    while (i < 12) {
+        uint8_t b = 11 - i;
+        uint8_t c = (display[n]>>b) & 0x01;                  // get the bit
+        bangBit(c);
+        i++;
+    }
+}
+
+void sendFrame(void) {
+    sendSyncPackage();
+    uint8_t p = 0;
+    while (p < DISPLAYSIZE) {
+        sendPackage(p);
+        p++;
+    }
+}
+
+
+
 
 extern "C" int main(void)
 {
 
-    pinMode(13, OUTPUT);
-    setLed(0,15,8,0);
+    pinMode(DATAPIN, OUTPUT);                   // data out
+    pinMode(CLKPIN, OUTPUT);                    // data clock
+    
+    pinMode(13, OUTPUT);                        // onboard led
+    digitalWriteFast(13, HIGH);
+    
     while (1) {
-        digitalWriteFast(13, HIGH);
-        delay(500);
+        sendFrame();
         digitalWriteFast(13, LOW);
-        delay(500);
+        sendFrame();
+        digitalWriteFast(13, HIGH);
     }
 }
 

@@ -70,7 +70,6 @@ int main(void) {
                 if (!databit && used_oldstate) { // ckeck if the used bit is not set but the one before was
                     use_this_package = 1;
                     databit = 1; // set the used bit for next ledboard
-                    // TODO we still net to set used_oldstate somewhere!!!
                     used_oldstate = 0;
                 } else if (databit) {
                     used_oldstate = 1;

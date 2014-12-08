@@ -1,4 +1,4 @@
-/home/timo/Projects/Blinkrad/software/teensy/build/src/main.o: \
+/home/timo/Projects/BlinkRad/software/teensy/build/src/main.o: \
  src/main.cpp teensy3/WProgram.h teensy3/avr/pgmspace.h \
  teensy3/avr/interrupt.h teensy3/avr_functions.h teensy3/wiring.h \
  teensy3/binary.h teensy3/core_id.h teensy3/core_pins.h \
