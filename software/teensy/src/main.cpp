@@ -17,7 +17,11 @@ void setLed(uint8_t nr, uint8_t r, uint8_t g, uint8_t b) {
 }
 
 void bangBit(uint8_t b) {
-    digitalWriteFast(DATAPIN, b);           // bang one bit
+    if (b) {
+        digitalWriteFast(DATAPIN, HIGH);          
+    } else {
+        digitalWriteFast(DATAPIN, LOW);           
+    }
     digitalWriteFast(CLKPIN, HIGH);         // rising edge
     delay(1);
     digitalWriteFast(CLKPIN, LOW);          // falling edge
@@ -38,7 +42,7 @@ void sendPackage(uint8_t n) {
     bangBit(0);
     while (i < 12) {
         uint8_t b = 11 - i;
-        uint8_t c = (display[n]>>b) & 0x01;                  // get the bit
+        uint8_t c = (uint8_t)(display[n]>>b) & 0x01;                  // get the bit
         bangBit(c);
         i++;
     }
