@@ -65,10 +65,10 @@ int main(void) {
             // set 4 highest bits 0
             data = data & pattern;
             
-            if (!gotdata) {                     // check if we already got data this frame
-                gotdata = 1;
-                if (bit_count == 13) {          // check if we received a full package yet
-                    if (!(data & usedbit)) {      // check if this package was already used
+            if (bit_count == 13) {          // check if we received a full package yet
+                if (!(data && usedbit)) {      // check if this package was already used
+                    if (!gotdata) {
+                        gotdata = 1;
                         setColor( (data & 0x0FFF) ); // send only rgb info
                     }
                 }
