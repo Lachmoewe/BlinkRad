@@ -5,20 +5,19 @@
 #include <util/delay.h>
 #include <stdint.h>
 
-uint8_t r,g,b;
-uint8_t pwm_count, bit_count;
-uint8_t sck_oldstate, used_oldstate;
-uint8_t changed_data;
-uint8_t use_this_package;
+#define SCK     PB2
+#define DATAIN  PB0
+#define DATAOUT PB1
 
-uint8_t databit;
-uint16_t data;
+uint8_t r,g,b;
 
 const uint8_t lookup[16] = {
     0, 3, 7, 12, 19, 26, 35, 45, 58, 73, 91, 113, 140, 171, 209, 254
 };
 
 int PWM(void) {
+    static uint8_t pwm_count = 0;
+
     if (pwm_count == 0) {
         PORTB |= (1<<PB3)|(1<<PB4)|(1<<PB5); //0b00011100;
     }
@@ -34,6 +33,12 @@ int PWM(void) {
     pwm_count++;
 }
 
+void setColor(uint16_t data) {
+    r = lookup[(data & 0x0F00)>>8];
+    g = lookup[(data & 0x00F0)>>4];
+    b = lookup[data & 0x000F];
+}
+
 int main(void) {
 
     DDRB = 0b00111010;
@@ -44,60 +49,58 @@ int main(void) {
     g = 255;
     b = 255;
 
-    pwm_count = 0;
-    bit_count = 0;
-    sck_oldstate = 0;
-    used_oldstate = 1;
-    use_this_package = 0;
+    uint8_t bit_count = 0;
+    uint8_t sck_oldstate = 0;
+    uint8_t gotdata = 0;
+    uint16_t data = 0;
+    uint16_t databit = 0;
 
-    uint16_t sync_sequence = 0x2FFF;  // 14 bit set to 1
-
+    const uint16_t sync_sequence = 0x3FFF;    // 14 bit set to 1
+    const uint16_t pattern       = 0x3FFF;          // 14 bit set to 1
+    const uint16_t syncbit       = 0x2000;
+    const uint16_t usedbit       = 0x1000;
 
     while (1) {
         // Toggle Port B pin 4 output state
-        if ((PORTB && (1<<PB2)) && !sck_oldstate) { // check if sck rised
+        if ((PORTB && (1<<SCK)) && !sck_oldstate) { // check if sck rised
             sck_oldstate = 1;
 
             // read datain pin, shift data one left and write databit to lowest pos
-            databit = (PORTB && (1<<PB0));
+            databit = (PORTB && (1<<DATAIN));
             data = (data<<1);
             data |= databit;
 
-            if ((data & sync_sequence) == sync_sequence) {
-                // we just found a sync sequence, reset the bit counter
-                bit_count = 0;
-            } else if ((bit_count == 1) && !changed_data) { // check if we got the used bit and didnt update rgb yet
-                if (!databit && used_oldstate) { // ckeck if the used bit is not set but the one before was
-                    use_this_package = 1;
-                    databit = 1; // set the used bit for next ledboard
-                    used_oldstate = 0;
-                } else if (databit) {
-                    used_oldstate = 1;
+            // set 4 highest bits 0
+            data = data & pattern;
+            
+            if (!gotdata) {                     // check if we already got data this frame
+                gotdata = 1;
+                if (bit_count == 13) {          // check if we received a full package yet
+                    if (!(data & usedbit)) {      // check if this package was already used
+                        setColor( (data & 0x0FFF) ); // send only rgb info
+                    }
                 }
-                bit_count++;
-            } else if ((bit_count == 13) && use_this_package) {
-                // we now received a full package and write its data to rgb
-                r = lookup[(data & 0x0F00)>>8];
-                g = lookup[(data & 0x00F0)>>4];
-                b = lookup[data & 0x000F];
-                use_this_package = 0; // we wont use this package anymore
-                bit_count++;
-            } else {
-                bit_count++;
-            } 
+            }
+            bit_count++;
+
             if (bit_count == 14) {
                 bit_count = 0;
             }
+            if (data == sync_sequence) {
+                // we just found a sync sequence, reset the bit counter
+                bit_count = 0;
+                gotdata = 0;
+            } 
 
-        } else if (!(PORTB && (1<<PB2)) && sck_oldstate){ // check if sck fell
+        } else if (!(PORTB && (1<<SCK)) && sck_oldstate){ // check if sck fell
             sck_oldstate = 0;
-
+            
             // write dataout pin
-            if (databit) {
-                PORTB |= (1<<PB1);
-            } else {
-                PORTB &= ~(1<<PB1);
-            }
+         // if (databit) {
+         //     PORTB |= (1<<DATAOUT);
+         // } else {
+         //     PORTB &= ~(1<<DATAOUT);
+         // }
         }
         PWM();
         _delay_us(1);

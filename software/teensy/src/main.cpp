@@ -1,6 +1,6 @@
 #include "WProgram.h"
 
-#define DISPLAYSIZE 36
+#define DISPLAYSIZE 3
 
 #define DATAPIN 11
 #define CLKPIN 14
@@ -23,9 +23,11 @@ void bangBit(uint8_t b) {
         digitalWriteFast(DATAPIN, LOW);           
     }
     digitalWriteFast(CLKPIN, HIGH);         // rising edge
-    delay(1);
+    //delayMicroseconds(10);
+    delay(10);
     digitalWriteFast(CLKPIN, LOW);          // falling edge
-    delay(1);
+    delay(10);
+    //delayMicroseconds(10);
 }
 
 void sendSyncPackage() {
@@ -62,7 +64,9 @@ void sendFrame(void) {
 
 extern "C" int main(void)
 {
-
+    setLed(0,0,7,7);
+    setLed(1,7,0,7);
+    setLed(2,7,7,7);
     pinMode(DATAPIN, OUTPUT);                   // data out
     pinMode(CLKPIN, OUTPUT);                    // data clock
     
