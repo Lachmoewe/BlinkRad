@@ -45,7 +45,6 @@ int main(void) {
     uint8_t sck_oldstate = 0;
     uint8_t gotdata = 0;
     uint16_t data = 0;
-    uint16_t databit = 0;
 
     const uint16_t sync_sequence = 0x3FFF;    // 14 bit set to 1
     const uint16_t pattern       = 0x3FFF;          // 14 bit set to 1
@@ -58,7 +57,7 @@ int main(void) {
             sck_oldstate = 1;
 
             // read datain pin, shift data one left and write databit to lowest pos
-            databit = (PORTB && (1<<DATAIN));
+            uint8_t databit = (PORTB && (1<<DATAIN));
             data = (data<<1);
             data |= databit;
 
@@ -88,11 +87,11 @@ int main(void) {
             sck_oldstate = 0;
             
             // write dataout pin
-         // if (databit) {
-         //     PORTB |= (1<<DATAOUT);
-         // } else {
-         //     PORTB &= ~(1<<DATAOUT);
-         // }
+            if (data & 0x01) {
+                PORTB |= (1<<DATAOUT);
+            } else {
+                PORTB &= ~(1<<DATAOUT);
+            }
         }
         PWM();
         _delay_us(1);

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.6.0">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.005" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.0025" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -508,7 +508,7 @@ Please make sure your boards conform to these design rules.</description>
 <element name="Q-BLUE" library="SparkFun-DiscreteSemi" package="SOT23" value="30V, 2.5A" x="5.207" y="9.271" rot="R180">
 <attribute name="PROD_ID" value="TRANS-08345" x="-18.923" y="30.861" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="R-RED" library="SparkFun-Resistors" package="0603-RES" value="" x="1.27" y="5.461" rot="R270"/>
+<element name="R-RED" library="SparkFun-Resistors" package="0603-RES" value="" x="1.4605" y="5.461" rot="R270"/>
 <element name="R-GREEN" library="SparkFun-Resistors" package="0603-RES" value="" x="8.763" y="5.461" rot="R270"/>
 <element name="R-BLUE" library="SparkFun-Resistors" package="0603-RES" value="" x="6.096" y="6.858"/>
 <element name="IC1" library="atmel" package="8S1" value="TINY13-20SSU" x="5.08" y="13.462" rot="R90">
@@ -531,8 +531,8 @@ Please make sure your boards conform to these design rules.</description>
 <signal name="N$1">
 <contactref element="D1" pad="1"/>
 <contactref element="R-RED" pad="2"/>
-<wire x1="1.27" y1="4.611" x2="1.69" y2="4.191" width="0.6096" layer="1"/>
-<wire x1="1.69" y1="4.191" x2="3.175" y2="4.318" width="0.6096" layer="1"/>
+<wire x1="1.4605" y1="4.611" x2="2.882" y2="4.611" width="0.6096" layer="1"/>
+<wire x1="2.882" y1="4.611" x2="3.175" y2="4.318" width="0.6096" layer="1"/>
 </signal>
 <signal name="N$3">
 <contactref element="D1" pad="4"/>
@@ -544,7 +544,7 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="R-RED" pad="1"/>
 <contactref element="Q-RED" pad="3"/>
 <wire x1="1.778" y1="8.171" x2="1.778" y2="6.819" width="0.6096" layer="1"/>
-<wire x1="1.778" y1="6.819" x2="1.27" y2="6.311" width="0.6096" layer="1"/>
+<wire x1="1.778" y1="6.819" x2="1.4605" y2="6.311" width="0.6096" layer="1"/>
 </signal>
 <signal name="N$4">
 <contactref element="D1" pad="3"/>
@@ -619,7 +619,10 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="IC1" pad="1"/>
 <contactref element="Q-BLUE" pad="1"/>
 <wire x1="7.734" y1="11.557" x2="7.443" y2="11.557" width="0.254" layer="1"/>
-<wire x1="7.443" y1="11.557" x2="6.157" y2="10.371" width="0.254" layer="1"/>
+<wire x1="7.443" y1="11.557" x2="6.604" y2="11.557" width="0.254" layer="1"/>
+<wire x1="6.604" y1="11.557" x2="6.223" y2="11.176" width="0.254" layer="1"/>
+<wire x1="6.223" y1="11.176" x2="6.223" y2="10.414" width="0.254" layer="1"/>
+<wire x1="6.223" y1="10.414" x2="6.157" y2="10.371" width="0.254" layer="1"/>
 </signal>
 <signal name="VCC">
 <contactref element="D1" pad="2"/>
@@ -640,12 +643,17 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="4.445" y1="3.175" x2="4.445" y2="4.318" width="0.6096" layer="16"/>
 <contactref element="C1" pad="1"/>
 <via x="1.397" y="11.938" extent="1-16" drill="0.3302" diameter="0.254"/>
+<wire x1="1.0795" y1="1.016" x2="0.9525" y2="1.143" width="0.8128" layer="16"/>
+<wire x1="0.9525" y1="1.143" x2="0.9525" y2="3.2385" width="0.8128" layer="16"/>
 </signal>
 <signal name="RED">
 <contactref element="IC1" pad="2"/>
 <contactref element="Q-RED" pad="1"/>
-<wire x1="7.734" y1="12.817" x2="5.274" y2="12.817" width="0.254" layer="1"/>
-<wire x1="5.274" y1="12.817" x2="2.728" y2="10.371" width="0.254" layer="1"/>
+<wire x1="4.8895" y1="12.827" x2="3.4925" y2="11.43" width="0.254" layer="1"/>
+<wire x1="3.4925" y1="11.43" x2="3.4925" y2="11.1355" width="0.254" layer="1"/>
+<wire x1="3.4925" y1="11.1355" x2="2.728" y2="10.371" width="0.254" layer="1"/>
+<wire x1="4.8895" y1="12.827" x2="7.724" y2="12.827" width="0.254" layer="1"/>
+<wire x1="7.724" y1="12.827" x2="7.734" y2="12.817" width="0.254" layer="1"/>
 </signal>
 <signal name="GREEN">
 <contactref element="IC1" pad="3"/>
