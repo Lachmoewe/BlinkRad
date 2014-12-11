@@ -87,7 +87,7 @@ int main(void) {
             sck_oldstate = 0;
             
             // write dataout pin
-            if (data & 0x01) {
+            if (data && 0x01) {
                 PORTB |= (1<<DATAOUT);
             } else {
                 PORTB &= ~(1<<DATAOUT);
