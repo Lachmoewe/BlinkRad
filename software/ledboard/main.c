@@ -25,10 +25,10 @@ int PWM(void) {
     pwm_count++;
 }
 
-void setColor(uint16_t data) {
-    r = lookup[(data & 0x0F00)>>8];
-    g = lookup[(data & 0x00F0)>>4];
-    b = lookup[data & 0x000F];
+void setColor(uint16_t cdata) {
+    r = lookup[(cdata & 0x0F00)>>8];
+    g = lookup[(cdata & 0x00F0)>>4];
+    b = lookup[cdata & 0x000F];
 }
 
 int main(void) {
