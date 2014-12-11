@@ -17,19 +17,11 @@ const uint8_t lookup[16] = {
 
 int PWM(void) {
     static uint8_t pwm_count = 0;
-
-    if (pwm_count == 0) {
-        PORTB |= (1<<PB3)|(1<<PB4)|(1<<PB5); //0b00011100;
-    }
-    if (pwm_count == r) {
-        PORTB &= ~(1<<PB3); //0b11101111; //r
-    }
-    if (pwm_count == g) {
-        PORTB &= ~(1<<PB4); //0b11110111; //g
-    }
-    if (pwm_count == b) {
-        PORTB &= ~(1<<PB5); //0b11111011; //b
-    }
+    if      (pwm_count == 0) { PORTB |= (1<<PB3)|(1<<PB4)|(1<<PB5); }
+    else if (pwm_count == r) { PORTB &= ~(1<<PB3); }
+    else if (pwm_count == g) { PORTB &= ~(1<<PB4); }
+    else if (pwm_count == b) { PORTB &= ~(1<<PB5); }
+    
     pwm_count++;
 }
 
