@@ -56,8 +56,11 @@ int main(void) {
             PWM(colorptr);
             _delay_us(100);
         }
-        color[0] = lookup[(uint8_t)(i>>8 & 0x0F)];
-        color[1] = lookup[(uint8_t)(i>>4 & 0x0F)];
+        uint8_t r,g,b;
+        r = i>>8;
+        g = i>>4;
+        color[0] = lookup[(uint8_t)(r & 0x0F)];
+        color[1] = lookup[(uint8_t)(g & 0x0F)];
         color[2] = lookup[(uint8_t)(i & 0xF)];
         i--;
     }
