@@ -37,7 +37,7 @@ int main(void) {
     // Set up Port B data to be all low
     PORTB = 0;  
     
-    r = 255;
+    r = 0;
     g = 255;
     b = 255;
 
@@ -58,7 +58,7 @@ int main(void) {
             sck_oldstate = 1;
 
             // read datain pin, shift data one left and write databit to lowest pos
-            databit = (PORTB && (1<<DATAIN));
+            if (PORTB & (1<<DATAIN)) { databit = 1; } else { databit = 0; }
             data = (data<<1);
             data |= databit;
 
@@ -84,11 +84,11 @@ int main(void) {
                 gotdata = 0;
             } 
 
-        } else if (!(PORTB && (1<<SCK)) && sck_oldstate){ // check if sck fell
+        } else if (!(PORTB & (1<<SCK)) && sck_oldstate){ // check if sck fell
             sck_oldstate = 0;
             
             // write dataout pin
-            if (databit) {
+            if (databit == 1) {
                 PORTB |= (1<<DATAOUT);
             } else if ( (bit_count == 1) && !gotdata && !databit ) {
                 // this sets the usedbit for the first unusedpackage in the datastream

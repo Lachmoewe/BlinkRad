@@ -3,8 +3,10 @@ FUSES = -U lfuse:w:0x7a:m -U hfuse:w:0xff:m
 
 all: program.elf
 
-program.elf: main.c
-	avr-gcc main.c $(AVRFLAGS) -o program.elf
+test: test.elf
+
+program.elf: test.c
+	avr-gcc test.c $(AVRFLAGS) -o program.elf
 	avr-objcopy -j .text -O ihex program.elf program.hex 
 
 flash:
@@ -15,3 +17,6 @@ fuse:
 
 clean:
 	rm program.elf program.hex
+
+
+
